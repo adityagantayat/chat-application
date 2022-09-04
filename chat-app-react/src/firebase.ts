@@ -5,12 +5,12 @@ import { initializeApp } from 'firebase/app';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyB-siQvJ_anaWduC-LRSr6HkGzKqvdCzUY',
-  authDomain: 'shop-ba44f.firebaseapp.com',
-  projectId: 'shop-ba44f',
-  storageBucket: 'shop-ba44f.appspot.com',
-  messagingSenderId: '635721666403',
-  appId: '1:635721666403:web:2ec7f51fe473859a08cd56',
+  apiKey: 'AIzaSyASd9A6iHqBZPbJHI2GWfnfPd3YFtTiONg',
+  authDomain: 'chat-bdbeb.firebaseapp.com',
+  projectId: 'chat-bdbeb',
+  storageBucket: 'chat-bdbeb.appspot.com',
+  messagingSenderId: '652596690544',
+  appId: '1:652596690544:web:2114d09996e269738dfeb5',
 };
 
 // Initialize Firebase

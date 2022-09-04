@@ -5,10 +5,11 @@ import { Logo, Page } from '../utils/styles';
 const RegisterPage = () => {
   return (
     <Page
+      display='flex'
+      justifyContent='space-evenly'
+      alignItems='center'
       style={{
-        display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-evenly',
         marginTop: '-30px',
       }}
     >

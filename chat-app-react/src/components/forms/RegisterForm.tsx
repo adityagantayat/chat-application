@@ -20,7 +20,6 @@ import {
 import app from '../../firebase';
 
 const RegisterForm = () => {
-  let imageUrl = '';
   const [file, setFile] = useState<File | null>(null);
   const {
     register,
@@ -73,15 +72,14 @@ const RegisterForm = () => {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            imageUrl = downloadURL;
-            console.log(downloadURL);
-            const fields = { ...data, imageUrl };
-            console.log(fields);
+            data.image = downloadURL;
+            console.log(data.image);
           });
         }
       );
       setFile(null);
     } else {
+      data.image = '';
       console.log(data);
     }
   };

@@ -3,10 +3,11 @@ import {
   ContextMenuProps,
   ConversationSelectedProps,
   MessageItemContentProps,
+  PageProps,
 } from './styleTypes';
 
 export const DARK = '#131313';
-export const SIDEBAR_WIDTH = 400;
+export const SIDEBAR_WIDTH = 350;
 
 export const InputField = styled.input`
   background-color: inherit !important;
@@ -43,21 +44,23 @@ export const Button = styled.button`
   color: green;
   background-color: inherit;
   outline: none;
-  border: 0.5px solid green;
+  border-left: 0.1px solid green;
+  border-top: 0.1px solid green;
   border-radius: 10px;
   font-family: Menlo;
   font-weight: 600;
   font-size: 18px;
+  height: 70px;
   padding: 20px 0;
-  box-shadow: 7px 6px 24px -1px rgba(38, 37, 37, 0.88);
-  -webkit-box-shadow: 7px 6px 24px -1px rgba(38, 37, 37, 0.88);
-  -moz-box-shadow: 7px 6px 24px -1px rgba(38, 37, 37, 0.88);
+  box-shadow: 12px 8px 39px -13px rgba(35, 122, 35, 0.3);
+  -webkit-box-shadow: 12px 8px 39px -13px rgba(35, 122, 35, 0.3);
+  -moz-box-shadow: 12px 8px 39px -13px rgba(35, 122, 35, 0.3);
   &:hover {
     cursor: pointer;
     /* transform: scale(1.02); */
     transition: all 0.4s ease;
-    /* color: #0974ff; */
-    background-color: #fff;
+    color: rgb(104, 248, 152);
+    background-color: #8f8f8f;
     border: 0.5px solid green;
   }
 `;
@@ -67,7 +70,7 @@ export const Logo = styled.img`
   text-align: center;
 `;
 export const FileLabel = styled.label`
-  height: 100px;
+  height: 80px;
   font-family: Menlo;
   cursor: pointer;
   margin-top: 10px;
@@ -93,12 +96,12 @@ export const FileLabel = styled.label`
     background-color: #8f8f8f;
   }
 `;
-export const Page = styled.div`
+export const Page = styled.div<PageProps>`
   height: 100%;
   background-color: #131212;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: ${(props) => props.display};
+  align-items: ${(props) => props.alignItems};
+  justify-content: ${(props) => props.justifyContent};
 `;
 
 export const ConversationSidebarStyle = styled.aside`
@@ -108,8 +111,13 @@ export const ConversationSidebarStyle = styled.aside`
   height: 100%;
   width: ${SIDEBAR_WIDTH}px;
   background-color: #1a1a1a;
-  border-right: 1px solid #5454543d;
+  border-right: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 4px 3px 12px -1px rgba(38, 37, 37, 0.88);
+  -webkit-box-shadow: 4px 3px 12px -1px rgba(38, 37, 37, 0.88);
+  -moz-box-shadow: 4px 3px 12px -1px rgba(38, 37, 37, 0.88);
   overflow-y: scroll;
+  margin-right: 6px;
   &::-webkit-scrollbar {
     display: none;
     /* width: 10px;
@@ -125,16 +133,22 @@ export const ConversationSidebarHeader = styled.header`
   width: ${SIDEBAR_WIDTH}px;
   top: 0;
   left: 0;
+  font-family: Menlo;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 32px;
   box-sizing: border-box;
+  color: #8f8f8f;
   background-color: #151515;
+  border-radius: 10px;
   height: 100px;
+  box-shadow: 4px 3px 12px -1px rgba(38, 37, 37, 0.88);
+  -webkit-box-shadow: 4px 3px 12px -1px rgba(38, 37, 37, 0.88);
+  -moz-box-shadow: 4px 3px 12px -1px rgba(38, 37, 37, 0.88);
   border-bottom: 1px solid #5454543d;
   & h1 {
-    font-weight: 400;
+    font-weight: 600;
   }
 `;
 

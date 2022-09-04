@@ -5,6 +5,7 @@ export type CreateUserParams = {
   firstName: string;
   lastName: string;
   password: string;
+  image?: string;
 };
 
 export type UserCredentialsParams = {
