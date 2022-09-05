@@ -10,11 +10,28 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const auth_module_1 = require("./auth/auth.module");
+const users_module_1 = require("./users/users.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("./utils/typeorm");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_1.ConfigModule.forRoot({ envFilePath: '.env.dev' }), auth_module_1.AuthModule],
+        imports: [
+            config_1.ConfigModule.forRoot({ envFilePath: '.env.dev' }),
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'mysql',
+                host: process.env.MYSQL_DB_HOST,
+                port: process.env.MYSQL_DB_PORT,
+                username: process.env.MYSQL_DB_USERNAME,
+                password: process.env.MYSQL_DB_PASSWORD,
+                database: process.env.MYSQL_DB_NAME,
+                entities: typeorm_2.default,
+                synchronize: true,
+            }),
+            auth_module_1.AuthModule,
+            users_module_1.UsersModule,
+        ],
         controllers: [],
     })
 ], AppModule);

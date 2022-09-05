@@ -14,14 +14,20 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
-const types_1 = require("../utils/types");
+const class_transformer_1 = require("class-transformer");
+const constants_1 = require("../utils/constants");
 const CreateUser_dto_1 = require("./dtos/CreateUser.dto");
 let AuthController = class AuthController {
-    constructor(authService) {
+    constructor(authService, userService) {
         this.authService = authService;
+        this.userService = userService;
     }
-    registerUser(createUserDto) {
-        console.log(createUserDto);
+    async registerUser(createUserDto) {
+        const user = await this.userService.createUser(createUserDto);
+        if (!user)
+            throw new common_1.HttpException(`${createUserDto.email} already exists.`, common_1.HttpStatus.CONFLICT);
+        else
+            return (0, class_transformer_1.instanceToPlain)(user);
     }
     login() { }
     status() { }
@@ -32,7 +38,7 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [CreateUser_dto_1.CreateUserDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], AuthController.prototype, "registerUser", null);
 __decorate([
     (0, common_1.Post)('login'),
@@ -53,9 +59,10 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "logout", null);
 AuthController = __decorate([
-    (0, common_1.Controller)(types_1.Routes.AUTH),
-    __param(0, (0, common_1.Inject)(types_1.Services.AUTH)),
-    __metadata("design:paramtypes", [Object])
+    (0, common_1.Controller)(constants_1.Routes.AUTH),
+    __param(0, (0, common_1.Inject)(constants_1.Services.AUTH)),
+    __param(1, (0, common_1.Inject)(constants_1.Services.USERS)),
+    __metadata("design:paramtypes", [Object, Object])
 ], AuthController);
 exports.AuthController = AuthController;
 //# sourceMappingURL=auth.controller.js.map
