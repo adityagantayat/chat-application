@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { IUserService } from './user';
-import { CreateUserDetails } from '../utils/types';
+import { CreateUserDetails, FindUserParams } from '../utils/types';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../utils/typeorm';
 import { Repository } from 'typeorm';
@@ -12,10 +12,10 @@ export class UserService implements IUserService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  async createUser(userDetails: CreateUserDetails) {
+  async createUser(userDetails: CreateUserDetails): Promise<User> {
     const hashedPassword = await hashPassword(userDetails.password);
 
-    const existingUser = await this.userRepository.findOneBy({
+    const existingUser = await this.userRepository.findOne({
       email: userDetails.email,
     });
     if (existingUser) return null;
@@ -25,5 +25,9 @@ export class UserService implements IUserService {
       password: hashedPassword,
     });
     return this.userRepository.save(newUser);
+  }
+
+  async findUser(findUserParams: FindUserParams): Promise<User> {
+    return this.userRepository.findOne(findUserParams);
   }
 }

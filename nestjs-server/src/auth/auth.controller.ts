@@ -6,12 +6,15 @@ import {
   Post,
   HttpException,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
 import { IUserService } from '../users/user';
 import { Routes, Services } from '../utils/constants';
 import { IAuthService } from './auth';
 import { CreateUserDto } from './dtos/CreateUser.dto';
+import { UserLoginDto } from './dtos/UserLogin.dto';
+import { LocalAuthGuard } from './utils/Guards';
 
 @Controller(Routes.AUTH)
 export class AuthController {
@@ -42,7 +45,8 @@ export class AuthController {
    * @Purpose : validating user and logging in
    */
   @Post('login')
-  login() {}
+  @UseGuards(LocalAuthGuard)
+  login(@Body() userLoginDto: UserLoginDto) {}
 
   /**
    * @Handler : status

@@ -5,3 +5,11 @@ export type CreateUserDetails = {
   password: string;
   image: string;
 };
+export type ValidateUserDetails = {
+  email: string;
+  password: string;
+};
+export type FindUserParams = Partial<{
+  id: number;
+  email: string;
+}>;
