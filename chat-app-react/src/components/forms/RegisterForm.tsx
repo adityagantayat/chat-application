@@ -1,7 +1,7 @@
 import { Check, UploadFile } from '@mui/icons-material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Button,
   FileLabel,
@@ -18,22 +18,24 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 import app from '../../firebase';
+import { postRegisterUser } from '../../utils/api';
 
 const RegisterForm = () => {
   const [file, setFile] = useState<File | null>(null);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<CreateUserParams>();
 
-  // useEffect(() => {
-  //   console.log(file);
-  //   getImageUrl();
-  // }, [file]);
-
   const handleFileUpload = (event: any) => {
     setFile(event.target.files[0]);
+  };
+
+  const postUserData = async (data: CreateUserParams) => {
+    await postRegisterUser(data);
+    navigate('/login');
   };
 
   const onSubmit = (data: CreateUserParams) => {
@@ -67,20 +69,22 @@ const RegisterForm = () => {
         },
         (error) => {
           // Handle unsuccessful uploads
+          console.log(error);
         },
         () => {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             data.image = downloadURL;
-            console.log(data.image);
+            postUserData(data);
           });
         }
       );
       setFile(null);
     } else {
-      data.image = '';
-      console.log(data);
+      data.image =
+        'https://firebasestorage.googleapis.com/v0/b/chat-bdbeb.appspot.com/o/1662491831437twitter_eggandgumdrop.0.jpg?alt=media&token=8b487689-1bc3-4bbf-863e-289ba3849166';
+      postUserData(data);
     }
   };
 
