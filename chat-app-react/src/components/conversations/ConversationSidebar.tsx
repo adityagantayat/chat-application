@@ -4,7 +4,7 @@ import {
   ConversationSidebarStyle,
 } from '../../utils/styles';
 import { TbEdit } from 'react-icons/tb';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 // import { CreateConversationModal } from '../modals/CreateConversationModal';
 // import { useSelector } from 'react-redux';
 // import { RootState } from '../../store';
@@ -12,17 +12,12 @@ import { useState } from 'react';
 // import { ConversationSidebarItem } from './ConversationSidebarItem';
 // import { GroupSidebarItem } from '../groups/GroupSidebarItem';
 import { Logo } from '../../utils/styles/index';
+import { AuthContext } from '../../utils/context/AuthContext';
 
 export const ConversationSidebar = () => {
   const [showModal, setShowModal] = useState(false);
-  const user = {
-    email: 'adityanarayan10@gmail.com',
-    firstName: 'Aditya',
-    lastName: 'Gantayat',
-    password: 'qwerty',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/chat-bdbeb.appspot.com/o/1662269078078258D4C84-46E2-4F36-AC4A-C1E8C1984937.JPG?alt=media&token=df5805fd-df32-4f6e-a60f-53e2dd3e64b9',
-  };
+  const { user } = useContext(AuthContext);
+
   // const conversations = useSelector(
   //   (state: RootState) => state.conversation.conversations
   // );
@@ -38,7 +33,7 @@ export const ConversationSidebar = () => {
       <ConversationSidebarStyle>
         <ConversationSidebarHeader>
           <Logo
-            src={user.image}
+            src={user?.image}
             style={{
               marginLeft: '-8px',
               height: '50px',
