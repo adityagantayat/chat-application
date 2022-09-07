@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { IUserService } from './user';
 import { CreateUserDetails, FindUserParams } from '../utils/types';
 import { InjectRepository } from '@nestjs/typeorm';

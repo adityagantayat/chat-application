@@ -4,6 +4,7 @@ import { ValidateUserDetails } from '../utils/types';
 import { Services } from '../utils/constants';
 import { compareHash } from '../utils/helpers';
 import { IUserService } from '../users/user';
+import { User } from '../utils/typeorm';
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -11,7 +12,9 @@ export class AuthService implements IAuthService {
     @Inject(Services.USERS) private readonly userService: IUserService,
   ) {}
 
-  async validateUser(userCredentials: ValidateUserDetails) {
+  async validateUser(
+    userCredentials: ValidateUserDetails,
+  ): Promise<User | null> {
     const user = await this.userService.findUser({
       email: userCredentials.email,
     });
@@ -19,6 +22,10 @@ export class AuthService implements IAuthService {
     if (!user)
       throw new HttpException('Invalid Credentials', HttpStatus.UNAUTHORIZED);
 
-    return compareHash(userCredentials.password, user.password);
+    const isPasswordValid = compareHash(
+      userCredentials.password,
+      user.password,
+    );
+    return isPasswordValid ? user : null;
   }
 }
