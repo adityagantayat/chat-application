@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import entities from './utils/typeorm';
 import { PassportModule } from '@nestjs/passport';
+import { ConversationsModule } from './conversations/conversations.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { PassportModule } from '@nestjs/passport';
       entities,
       synchronize: true,
     }),
+    ConversationsModule,
   ],
   controllers: [],
 })

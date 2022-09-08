@@ -69,5 +69,7 @@ export class AuthController {
    * @Purpose : Logs the user out
    */
   @Post('logout')
-  logout() {}
+  logout() {
+    //
+  }
 }
