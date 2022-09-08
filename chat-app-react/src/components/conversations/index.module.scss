@@ -33,3 +33,12 @@
 .radio {
   display: none;
 }
+
+.editIcon {
+  cursor: pointer;
+  transition: all 0.3s step-end;
+  & :hover {
+    color: #fff;
+    // transform: scale(1.2);
+  }
+}

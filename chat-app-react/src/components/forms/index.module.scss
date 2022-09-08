@@ -19,7 +19,12 @@ form {
   margin: 10px 0;
   text-align: center;
 }
-
+.createConversationForm {
+  width: 100%;
+}
+.message {
+  margin: 8px 0;
+}
 // input:-internal-autofill-selected {
 //   appearance: menulist-button;
 //   background-image: none !important;

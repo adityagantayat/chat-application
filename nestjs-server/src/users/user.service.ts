@@ -12,6 +12,11 @@ export class UserService implements IUserService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
+  /**
+   * @Function : createUser
+   * @Tables_Affected : users
+   * @Purpose : creates a new user in table if the email id isn't already present
+   */
   async createUser(userDetails: CreateUserDetails): Promise<User> {
     const hashedPassword = await hashPassword(userDetails.password);
 
@@ -27,6 +32,11 @@ export class UserService implements IUserService {
     return this.userRepository.save(newUser);
   }
 
+  /**
+   * @Function : findUser
+   * @Tables_Affected : users
+   * @Purpose : Finds the user in table either by id or email
+   */
   async findUser(findUserParams: FindUserParams): Promise<User> {
     return this.userRepository.findOne(findUserParams);
   }

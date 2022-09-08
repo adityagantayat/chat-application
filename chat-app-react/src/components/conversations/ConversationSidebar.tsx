@@ -5,6 +5,8 @@ import {
 } from '../../utils/styles';
 import { TbEdit } from 'react-icons/tb';
 import { useContext, useState } from 'react';
+import styles from './index.module.scss';
+
 // import { CreateConversationModal } from '../modals/CreateConversationModal';
 // import { useSelector } from 'react-redux';
 // import { RootState } from '../../store';
@@ -13,6 +15,7 @@ import { useContext, useState } from 'react';
 // import { GroupSidebarItem } from '../groups/GroupSidebarItem';
 import { Logo } from '../../utils/styles/index';
 import { AuthContext } from '../../utils/context/AuthContext';
+import CreateConversationModal from '../modals/CreateConversationModal';
 
 export const ConversationSidebar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -29,7 +32,7 @@ export const ConversationSidebar = () => {
 
   return (
     <>
-      {/* {showModal && <CreateConversationModal setShowModal={setShowModal} />} */}
+      {showModal && <CreateConversationModal setShowModal={setShowModal} />}
       <ConversationSidebarStyle>
         <ConversationSidebarHeader>
           <Logo
@@ -42,7 +45,10 @@ export const ConversationSidebar = () => {
             }}
           />
           <h1>Conversations</h1>
-          <div onClick={() => setShowModal(!showModal)}>
+          <div
+            className={styles.editIcon}
+            onClick={() => setShowModal(!showModal)}
+          >
             <TbEdit size={35} />
           </div>
         </ConversationSidebarHeader>

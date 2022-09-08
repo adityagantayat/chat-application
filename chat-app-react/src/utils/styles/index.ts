@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { fadeInUpwards } from './keyframes';
 import {
   ContextMenuProps,
   ConversationSelectedProps,
@@ -181,12 +182,16 @@ export const OverlayStyle = styled.div`
   align-items: center;
   z-index: 10;
 `;
-
-export const ModalContainerStyle = styled.div`
+type ModalProps = Partial<{
+  showModal: boolean;
+}>;
+export const ModalContainerStyle = styled.div<ModalProps>`
+  position: relative;
   background-color: #121212;
   width: 650px;
   box-sizing: border-box;
   border-radius: 10px;
+  animation: ${fadeInUpwards} 500ms ease;
 `;
 
 export const ModalHeaderStyle = styled.header`
@@ -200,6 +205,7 @@ export const ModalHeaderStyle = styled.header`
   & h2 {
     font-weight: 500;
     margin: 0;
+    color: #8f8f8f;
   }
 `;
 
@@ -208,7 +214,7 @@ export const ModalContentBodyStyle = styled.div`
 `;
 
 export const TextField = styled.textarea`
-  font-family: 'Inter';
+  font-family: 'Monaco';
   outline: none;
   border: none;
   background-color: inherit;
