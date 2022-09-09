@@ -1,3 +1,5 @@
+import { User } from './typeorm';
+
 export type CreateUserDetails = {
   email: string;
   firstName: string;
@@ -17,4 +19,13 @@ export type CreateConversationParams = {
   authorId: number;
   recipientId: number;
   message: string;
+};
+export interface AuthenticatedRequest extends Request {
+  user: User;
+}
+export type FindParticipantParams = Partial<{
+  id: number;
+}>;
+export type CreateParticipantParams = {
+  id: number;
 };

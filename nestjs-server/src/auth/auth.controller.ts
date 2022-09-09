@@ -12,9 +12,9 @@ import {
 } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
 import { Request, Response } from 'express';
-import { IUserService } from '../users/user';
+import { IUserService } from '../users/user.interface';
 import { Routes, Services } from '../utils/constants';
-import { IAuthService } from './auth';
+import { IAuthService } from './auth.interface';
 import { CreateUserDto } from './dtos/CreateUser.dto';
 import { AuthenticatedGuard, LocalAuthGuard } from './utils/Guards';
 

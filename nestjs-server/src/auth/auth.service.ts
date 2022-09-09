@@ -1,9 +1,9 @@
 import { Inject, Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { IAuthService } from './auth';
+import { IAuthService } from './auth.interface';
 import { ValidateUserDetails } from '../utils/types';
 import { Services } from '../utils/constants';
 import { compareHash } from '../utils/helpers';
-import { IUserService } from '../users/user';
+import { IUserService } from '../users/user.interface';
 import { User } from '../utils/typeorm';
 
 @Injectable()

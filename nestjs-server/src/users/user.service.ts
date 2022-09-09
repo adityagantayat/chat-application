@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IUserService } from './user';
+import { IUserService } from './user.interface';
 import { CreateUserDetails, FindUserParams } from '../utils/types';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../utils/typeorm';
@@ -38,6 +38,17 @@ export class UserService implements IUserService {
    * @Purpose : Finds the user in table either by id or email
    */
   async findUser(findUserParams: FindUserParams): Promise<User> {
-    return this.userRepository.findOne(findUserParams);
+    return this.userRepository.findOne(findUserParams, {
+      relations: ['participant'],
+    });
+  }
+
+  /**
+   * @Function : saveUser
+   * @Tables_Affected : users
+   * @Purpose : saves the user record in db
+   */
+  async saveUser(user: User): Promise<User> {
+    return this.userRepository.save(user);
   }
 }

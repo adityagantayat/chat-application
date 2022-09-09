@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { PassportSerializer } from '@nestjs/passport';
 import { User } from '../../utils/typeorm';
-import { IUserService } from '../../users/user';
+import { IUserService } from '../../users/user.interface';
 import { Services } from '../../utils/constants';
 
 @Injectable()
