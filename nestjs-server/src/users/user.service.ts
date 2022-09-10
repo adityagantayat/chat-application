@@ -38,9 +38,7 @@ export class UserService implements IUserService {
    * @Purpose : Finds the user in table either by id or email
    */
   async findUser(findUserParams: FindUserParams): Promise<User> {
-    return this.userRepository.findOne(findUserParams, {
-      relations: ['participant'],
-    });
+    return this.userRepository.findOne(findUserParams);
   }
 
   /**
