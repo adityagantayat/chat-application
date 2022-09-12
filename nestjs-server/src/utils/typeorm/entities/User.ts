@@ -1,5 +1,12 @@
 import { Exclude } from 'class-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Message } from './Message';
 
 @Entity({ name: 'users' })
 export class User {
@@ -21,4 +28,7 @@ export class User {
 
   @Column({ length: 600 })
   image: string;
+  @OneToMany(() => Message, (message) => message.author)
+  @JoinColumn()
+  messages: Message[];
 }
