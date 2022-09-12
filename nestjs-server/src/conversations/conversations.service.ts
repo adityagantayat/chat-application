@@ -26,6 +26,7 @@ export class ConversationsService implements IConversationsService {
         'creator.firstName',
         'creator.lastName',
         'creator.email',
+        'creator.image',
       ])
       .leftJoin('conversation.recipient', 'recipient')
       .addSelect([
@@ -33,6 +34,7 @@ export class ConversationsService implements IConversationsService {
         'recipient.firstName',
         'recipient.lastName',
         'recipient.email',
+        'recipient.image',
       ])
       .where('creator.id = :id', { id })
       .orWhere('recipient.id = :id', { id })

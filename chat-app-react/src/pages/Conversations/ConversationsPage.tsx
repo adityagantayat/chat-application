@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 // import { useDispatch } from 'react-redux';
 import { Outlet, useParams } from 'react-router-dom';
 import { ConversationPanel } from '../../components/conversations/ConversationPanel';
@@ -15,16 +15,21 @@ import { ConversationSidebar } from '../../components/conversations/Conversation
 // import { SocketContext } from '../../utils/context/SocketContext';
 import { Page } from '../../utils/styles';
 import { Conversation, MessageEventPayload } from '../../utils/types';
+import { getConversations } from '../../utils/api';
 
 export const ConversationPage = () => {
   const { id } = useParams();
+  const [conversations, setConversations] = useState<Conversation[]>([]);
   // const dispatch = useDispatch<AppDispatch>();
   // const socket = useContext(SocketContext);
 
-  // useEffect(() => {
-  //   dispatch(updateType('private'));
-  //   dispatch(fetchConversationsThunk());
-  // }, []);
+  useEffect(() => {
+    getConversations()
+      .then(({data}) => setConversations(data)
+      )
+      .catch((err) => console.log(err)
+      )
+  }, []);
 
   // useEffect(() => {
   //   socket.on('onMessage', (payload: MessageEventPayload) => {
@@ -54,7 +59,7 @@ export const ConversationPage = () => {
 
   return (
     <Page>
-      <ConversationSidebar />
+      <ConversationSidebar conversations={conversations} />
       {!id && <ConversationPanel />}
       <Outlet />
     </Page>
