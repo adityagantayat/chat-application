@@ -16,14 +16,14 @@ export const getAuthUser = () =>
 export const getConversations = () =>
   axios.get<Conversation[]>(`${BASE_URL}/conversations`, config);
 
-// export const getConversationById = (id: number) =>
-//   axiosClient.get<Conversation>(`/conversations/${id}`, config);
+export const getConversationById = (id: number) =>
+  axios.get<Conversation>(`${BASE_URL}/conversations/${id}`, config);
 
-// export const getConversationMessages = (conversationId: number) =>
-//   axiosClient.get<FetchMessagePayload>(
-//     `/conversations/${conversationId}/messages`,
-//     config
-//   );
+export const getConversationMessages = (conversationId: number) =>
+  axios.get(
+    `${BASE_URL}/messages/${conversationId}`,
+    config
+  );
 
 // export const postNewMessage = ({ id, content }: CreateMessageParams) =>
 //   axiosClient.post(`/conversations/${id}/messages`, { content }, config);

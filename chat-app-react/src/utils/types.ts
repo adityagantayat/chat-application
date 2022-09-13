@@ -39,7 +39,7 @@ export type MessageType = {
   content: string;
   createdAt: string;
   author: User;
-  conversation: Conversation;
+  // conversation: Conversation;
 };
 
 export type FetchMessagePayload = {

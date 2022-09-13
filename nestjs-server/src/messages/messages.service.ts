@@ -6,7 +6,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Conversation } from '../utils/typeorm/entities/Conversation';
 import { instanceToPlain } from 'class-transformer';
-import { User } from '../utils/typeorm/entities/User';
 
 @Injectable()
 export class MessagesService implements IMessageService {
@@ -17,6 +16,18 @@ export class MessagesService implements IMessageService {
     private readonly conversationRepository: Repository<Conversation>,
   ) {}
 
+  async getMessagesByConversationId(id: number): Promise<Message[]> {
+    return this.messageRepository.find({
+      where: {
+        conversation: { id },
+      },
+      order: {
+        createdAt: 'DESC',
+      },
+      relations: ['author'],
+    });
+  }
+
   async createMessage(params: CreateMessageParams): Promise<Message> {
     const conversation = await this.conversationRepository.findOne({
       where: { id: params.conversationId },
@@ -26,7 +37,7 @@ export class MessagesService implements IMessageService {
       throw new HttpException('Conversation not found', HttpStatus.BAD_REQUEST);
     if (
       conversation.creator.id !== params.user.id &&
-      conversation.creator.id !== params.user.id
+      conversation.recipient.id !== params.user.id
     )
       throw new HttpException('Cannot create message', HttpStatus.FORBIDDEN);
     const newMessage = this.messageRepository.create({
