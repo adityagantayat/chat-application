@@ -58,7 +58,7 @@ export const ConversationSidebar: FC<Props> = ({ conversations }) => {
 					{conversations.map((conversation) => (
 						<ConversationSidebarItemStyle key={conversation.id} onClick={() => navigate(`/conversations/${conversation.id}`)}>
 							<Logo
-								src={conversation.recipient.image}
+								src={conversation.recipient.id === user?.id ? conversation.creator.image : conversation.recipient.image}
 								style={{
 									marginLeft: '-8px',
 									height: '40px',

@@ -7,7 +7,6 @@ import * as passport from 'passport';
 import { Session } from './utils/typeorm';
 import { TypeormStore } from 'connect-typeorm/out';
 import { getRepository } from 'typeorm';
-// import { AppDataSource } from './utils/typeorm';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
