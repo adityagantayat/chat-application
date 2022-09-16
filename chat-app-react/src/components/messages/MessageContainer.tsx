@@ -36,7 +36,9 @@ export const MessageContainer: FC<Props> = ({ messages }) => {
 								</span>
 							</MessageItemHeader>
 							<div>
-								<MessageItemContent bg_color={isUserMsg(msg) ? 'blueviolet' : 'teal'}>{msg.content}</MessageItemContent>
+								<MessageItemContent bg_color={isUserMsg(msg) ? 'blueviolet' : 'linear-gradient(#ee5988, rgb(167,151,255) 70%, rgb(0, 229, 255) 100%)'}>
+									{msg.content}
+								</MessageItemContent>
 								<MessageTime className='time'>{formatRelative(new Date(msg.createdAt), new Date())}</MessageTime>
 							</div>
 						</MessageItemDetails>

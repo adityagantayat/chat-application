@@ -352,7 +352,8 @@ export const MessageItemContent = styled.div<MessageItemContentProps>`
 	margin-top: 5px;
 	border-radius: 10px;
 	width: fit-content;
-	background-color: ${({ bg_color }) => bg_color};
+	/* font-family: inter; */
+	background: ${({ bg_color }) => bg_color};
 	padding: ${({ padding }) => padding};
 	color: antiquewhite;
 	word-break: normal;
