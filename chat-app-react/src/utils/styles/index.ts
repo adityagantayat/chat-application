@@ -290,7 +290,7 @@ export const MessageInput = styled.input`
 	background-color: inherit;
 	outline: none;
 	border: none;
-	color: #454545;
+	color: #fff;
 	font-family: 'Menlo';
 	box-sizing: border-box;
 	font-size: 18px;

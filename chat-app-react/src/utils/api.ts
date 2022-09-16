@@ -1,32 +1,22 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { Conversation, CreateUserParams, User, UserCredentialsParams } from './types';
+import { Conversation, CreateMessageParams, CreateUserParams, User, UserCredentialsParams } from './types';
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 const config: AxiosRequestConfig = { withCredentials: true };
 
-export const postRegisterUser = async (data: CreateUserParams) =>
-  axios.post(`${BASE_URL}/auth/register`, data, config);
+export const postRegisterUser = async (data: CreateUserParams) => axios.post(`${BASE_URL}/auth/register`, data, config);
 
-export const postLoginUser = async (data: UserCredentialsParams) =>
-  axios.post(`${BASE_URL}/auth/login`, data, config);
+export const postLoginUser = async (data: UserCredentialsParams) => axios.post(`${BASE_URL}/auth/login`, data, config);
 
-export const getAuthUser = () =>
-  axios.get<User>(`${BASE_URL}/auth/status`, config);
+export const getAuthUser = () => axios.get<User>(`${BASE_URL}/auth/status`, config);
 
-export const getConversations = () =>
-  axios.get<Conversation[]>(`${BASE_URL}/conversations`, config);
+export const getConversations = () => axios.get<Conversation[]>(`${BASE_URL}/conversations`, config);
 
-export const getConversationById = (id: number) =>
-  axios.get<Conversation>(`${BASE_URL}/conversations/${id}`, config);
+export const getConversationById = (id: number) => axios.get<Conversation>(`${BASE_URL}/conversations/${id}`, config);
 
-export const getConversationMessages = (conversationId: number) =>
-  axios.get(
-    `${BASE_URL}/messages/${conversationId}`,
-    config
-  );
+export const getConversationMessages = (conversationId: number) => axios.get(`${BASE_URL}/messages/${conversationId}`, config);
 
-// export const postNewMessage = ({ id, content }: CreateMessageParams) =>
-//   axiosClient.post(`/conversations/${id}/messages`, { content }, config);
+export const postNewMessage = (data: CreateMessageParams) => axios.post(`${BASE_URL}/messages`, data, config);
 
 // export const postNewConversation = (data: CreateConversationParams) =>
 //   axiosClient.post<Conversation>(`/conversations`, data, config);
