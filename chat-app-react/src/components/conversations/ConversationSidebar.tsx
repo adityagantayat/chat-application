@@ -14,11 +14,13 @@ import { AuthContext } from '../../utils/context/AuthContext';
 import CreateConversationModal from '../modals/CreateConversationModal';
 import { Conversation } from '../../utils/types';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 type Props = {
 	conversations: Conversation[];
 };
-export const ConversationSidebar: FC<Props> = ({ conversations }) => {
+export const ConversationSidebar: FC<Props> = () => {
 	const [showModal, setShowModal] = useState(false);
 	const { user } = useContext(AuthContext);
 	const navigate = useNavigate();
@@ -26,9 +28,7 @@ export const ConversationSidebar: FC<Props> = ({ conversations }) => {
 	const getDisplayUser = (conversation: Conversation) => {
 		return conversation.creator.id === user?.id ? conversation.recipient : conversation.creator;
 	};
-	// const conversations = useSelector(
-	//   (state: RootState) => state.conversation.conversations
-	// );
+	const conversations = useSelector((state: RootState) => state.conversation.conversations);
 	// const groups = useSelector((state: RootState) => state.groups.groups);
 
 	// const selectedConversationType = useSelector(

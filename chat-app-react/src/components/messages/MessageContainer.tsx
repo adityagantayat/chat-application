@@ -4,6 +4,9 @@ import { MessageContainerStyle, MessageItemContainer, MessageItemContent, Messag
 import { MessageType } from '../../utils/types';
 import { MessageItemHeader, MessageTime } from '../../utils/styles/index';
 import { AuthContext } from '../../utils/context/AuthContext';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { RootState } from '../../store';
 
 type Props = {
 	messages: MessageType[];
@@ -11,16 +14,23 @@ type Props = {
 
 export const MessageContainer: FC<Props> = ({ messages }) => {
 	const { user } = useContext(AuthContext);
+	const { id } = useParams();
+	const conversationMessages = useSelector((state: RootState) => state.messages.messages);
 	const isUserMsg = (msg: MessageType) => {
 		return msg.author.id === user?.id;
 	};
 	const isSameAuthor = (msg: MessageType) => {
-		const current = messages.findIndex((item: MessageType) => item.id === msg.id);
-		return messages[current]?.author?.id === messages[current + 1]?.author?.id;
+		if (msgs) {
+			const current = msgs.messages.findIndex((item: MessageType) => item.id === msg.id);
+			return msgs.messages[current]?.author?.id === msgs.messages[current + 1]?.author?.id;
+		}
 	};
+	const msgs = conversationMessages.find((cm) => cm.id === parseInt(id!));
+
+	if (!msgs) return null;
 	return (
 		<MessageContainerStyle>
-			{messages.map((msg) => (
+			{msgs?.messages?.map((msg) => (
 				<MessageItemContainer
 					key={msg.id}
 					justify={isUserMsg(msg) ? 'flex-end' : 'flex-start'}

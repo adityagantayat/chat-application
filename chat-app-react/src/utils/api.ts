@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { Conversation, CreateMessageParams, CreateUserParams, User, UserCredentialsParams } from './types';
+import { Conversation, CreateMessageParams, CreateUserParams, FetchMessagePayload, MessageType, User, UserCredentialsParams } from './types';
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 const config: AxiosRequestConfig = { withCredentials: true };
@@ -14,7 +14,7 @@ export const getConversations = () => axios.get<Conversation[]>(`${BASE_URL}/con
 
 export const getConversationById = (id: number) => axios.get<Conversation>(`${BASE_URL}/conversations/${id}`, config);
 
-export const getConversationMessages = (conversationId: number) => axios.get(`${BASE_URL}/messages/${conversationId}`, config);
+export const getConversationMessages = (conversationId: number) => axios.get<FetchMessagePayload>(`${BASE_URL}/messages/${conversationId}`, config);
 
 export const postNewMessage = (data: CreateMessageParams) => axios.post(`${BASE_URL}/messages`, data, config);
 

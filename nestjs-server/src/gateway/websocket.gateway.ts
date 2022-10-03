@@ -26,7 +26,6 @@ export class MessagingGateway implements OnGatewayConnection {
   }
   @OnEvent('message.create')
   handleMessageCreateEvent(payload: any) {
-    console.log(payload);
     this.server.emit('onMessage', payload);
   }
 }
