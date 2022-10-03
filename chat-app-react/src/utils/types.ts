@@ -50,7 +50,7 @@ export type FetchMessagePayload = {
 export type MessageEventPayload = {
 	id: number;
 	createdAt: string;
-	conversation: ConversationType;
+	conversation: Conversation;
 	author: User;
 	content: string;
 };

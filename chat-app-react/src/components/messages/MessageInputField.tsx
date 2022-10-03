@@ -9,7 +9,7 @@ type Props = {
 const MessageInputField: FC<Props> = ({ content, setContent, sendMsg }) => {
 	return (
 		<MessageInputContainer>
-			<form onSubmit={sendMsg}>
+			<form onSubmit={sendMsg} style={{ width: '100%' }}>
 				<MessageInput value={content} onChange={(e) => setContent(e.target.value)} />
 			</form>
 		</MessageInputContainer>
